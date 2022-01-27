@@ -1,0 +1,85 @@
+@font-face {
+    font-family: 'Gotham-bold';
+    src: url(GothamBold.ttf);
+}
+.card__label{
+    background-color: #fff;
+    border: solid 1px #ddd;
+    border-radius: 50%;
+    box-sizing: border-box;
+    height: 30px;
+    padding: 0 5.5px;
+    position: absolute;
+    right: 10px;
+    text-align: center; 
+    top:10px;
+    width: 30px;
+}
+.columns-editor{
+    display: flex;
+}
+.columns-editor div{
+    background-size: cover;
+    cursor: pointer;
+    height: 20px;
+    margin-right: 10px;
+    width: 20px;
+}
+.four-columns-active{
+    background-image: url(../assets/four-col.png); 
+    display: block !important;
+}
+.four-columns-inactive{
+    background-image: url(../assets/4-col-non-active.png); 
+    display: block !important;
+}
+.two-columns-active{
+    background-image: url(../assets/2-col-active.png);
+    display: block !important;
+}
+.two-columns-inactive{
+    background-image: url(../assets/two-column.png);
+    display: block !important;
+}
+.price .price-item{
+    font-family: 'Gotham-bold';
+    font-size: 12px;
+}
+
+.price--on-sale .price-item--regular{
+    color: red !important;
+}
+.product-vendor{
+    color: #222;
+    font-family: 'Gotham-bold';
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 13px;
+    margin: 0;
+    text-transform: uppercase;
+}
+.product-price{
+    font-family: 'Gotham-bold';
+    font-size: 12px;
+}
+.size{
+    background-color: #fff;
+    border: 1px solid #666666;
+    color: #333;
+    display: inline-block;
+    font-size: 10px;
+    height: 24px;
+    line-height: 22px;
+    min-width: 24px;
+    padding: 0 5px;
+    text-align: center;
+    text-decoration: none;
+}
+.size:hover{
+    background-color: #333;
+    color: #fff; 
+}
+.sizes{
+    z-index: 200;
+}
+

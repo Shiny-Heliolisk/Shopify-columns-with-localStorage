@@ -1,0 +1,100 @@
+<div class="slider">
+<img
+            src="{{ section.settings.pike | img_url: 'master' }}"
+            alt="{{ section.settings.pike.alt | escape }}"
+            loading="lazy"
+            width="{{ section.settings.pike.width }}"
+            height="{{ section.settings.pike.height }}"
+          >
+  
+  <div class="slider-title">
+    {%- for block in section.blocks -%}
+    <h4>{{ block.settings.small_title }}</h4>
+    <h2>{{ block.settings.main_title }}</h2>
+    {%- endfor -%}
+  </div>
+
+  <ul class="owl-carousel">
+    {%- for block in section.blocks -%}
+    {%- if block.settings.pike_image != blank or block.settings.pike_title != blank or block.settings.pike_content != blank -%}
+    <li class="item">
+      {%- if block.settings.pike_image == blank -%}
+      <img src="{{ block.settings.pike_image | img_url: 'master' }}"
+      alt="{{ section.settings.pike_image.alt | escape }}"
+      loading="lazy"
+      width="0"
+      height="0">
+      {%- else -%}
+      <img src="{{ block.settings.pike_image | img_url: 'master' }}"
+          alt="{{ section.settings.pike_image.alt | escape }}"
+          loading="lazy"
+          width="{{ section.settings.pike_image.width }}"
+          height="{{ section.settings.pike_image.height }}">
+      {%- endif -%}
+        
+          
+          <h2>{{ block.settings.pike_title }}</h2>
+          <span class="pike-content">{{ block.settings.pike_content }}</span>
+      
+    </li>
+    {%- endif -%}
+    {%- endfor -%}
+  </ul>
+
+</div>
+
+{% schema %}
+{
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "pike",
+            "label": "Back ground"
+        }
+    ],
+    "blocks": [
+        {
+          "type":"text",
+          "name":"Title",
+          "settings": [
+            {
+              "type": "text",
+              "id": "small_title",
+              "label": "Small title"
+            },
+            {
+              "type": "text",
+              "id": "main_title",
+              "label": "Main title"
+            }
+          ]
+        },
+        {
+          "type":"column",
+          "name":"Item to slider",
+          "settings": [
+            {
+              "type":"image_picker",
+              "id":"pike_image",
+              "label":"Image for an item"
+            },
+            {
+              "type":"text",
+              "id":"pike_title",
+              "label":"Title"
+            },
+            {
+              "type":"text",
+              "id":"pike_content",
+              "label":"Content"
+            }
+          ]
+        }
+    ],
+    "presets": [
+    {
+      "name": "Pike"
+    }
+  ]
+}
+{% endschema %}

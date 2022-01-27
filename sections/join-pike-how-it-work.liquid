@@ -1,0 +1,94 @@
+{%- style -%}
+.pike-how-it-work{
+    background-color: {{ section.settings.bg_color }};
+    text-align: center;
+    padding: 60px;
+}
+.hiw-items{
+    padding: 0 30px;
+    display: flex;
+}
+.hiw-numbers{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    text-align: center;
+    color: white;
+    background-color: burlywood;
+    display: inline-block;
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 24px;
+    font-weight: bold;
+}
+.hiw-item{
+    width: 33.33%;
+    text-align: center;
+}
+.hiw-item>h1{
+    margin: 13px;
+}
+.hiw-title{
+    color:black;
+}
+{%- endstyle -%}
+<div class="pike-how-it-work">
+    <h1 class="hiw-title">{{ section.settings.title }}</h1>
+    <div class="hiw-items">
+        {% for block in section.blocks %}
+            <div class="hiw-item">
+                <span class="hiw-numbers">
+                    {{ block.settings.number }}
+                </span>
+                <h1 class="hiw-title">{{ block.settings.name }}</h1>
+                <p>{{ block.settings.desc }}</p>
+            </div>
+        {% endfor %}
+    </div>
+</div>
+
+{% schema %}
+{
+   "presets": [
+       {
+           "name":"Pike HIW"
+       }
+   ],
+    "settings": [
+      {
+         "type": "text",
+         "id":"title",
+         "label":"Title"
+      },
+      {
+         "type": "color",
+         "id" :"bg_color",
+         "label":"background color"
+      }
+  ],
+    "blocks":[
+      {
+         "name": "items",
+        "type": "block",
+       "settings": [
+           {
+              "type": "text",
+              "label":"number",
+              "id":"number"
+           },
+           {
+              "type": "text",
+              "label":"name",
+              "id":"name"
+           },
+           {
+              "type": "text",
+              "label":"description",
+              "id":"desc"
+           }
+       ]
+      }
+    ]  
+}
+{% endschema %}

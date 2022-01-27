@@ -1,0 +1,119 @@
+<style>
+    .pike-banner{
+        position: relative;
+    }
+    .pike-banner>img{
+        /* position:relative;
+        left:50%;
+        transform: translate(-50%); */
+        width: 100%;
+        height: auto;
+    }
+    .bottom-left-pike{
+        position: absolute;
+        bottom:0;
+        left: 25%;
+        transform: translate(-50%,-50%);
+    }
+
+    .center-pike{
+        position: absolute;
+        top:50%;
+        left: 50%;
+        transform: translate(-50%,-50%);
+    }
+    
+    .bottom-right-pike{
+        position: absolute;
+        bottom:0;
+        left: 75%;
+        transform: translate(-50%,-50%);
+    }
+    .pike-banner h1{
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+        font-weight: bold;
+    }
+    .blank-div{
+        width:100%;
+        height: fit-content;
+        min-height: 500px;
+        background-color: #ddd;
+    }
+</style>
+<div class="pike-banner">
+    {%- if section.settings.banner_img == blank -%}
+
+    <div class="blank-div">
+        <!-- this appear when the back ground not be set yet -->
+    </div>
+
+    {%- else -%}
+
+    <img src="{{ section.settings.banner_img | img_url: 'master' }}"
+          alt="{{ section.settings.banner_img.alt | escape }}"
+          loading="lazy"
+          width="{{ section.settings.banner_img.width }}"
+          height="{{ section.settings.banner_img.height }}">
+    {%- endif -%}
+    {%- for block in section.blocks -%}
+    <div class="{{ block.settings.banner_position }}">
+        
+        <h1>{{ block.settings.title }}</h1>
+        
+    </div>
+    {%- endfor -%}
+
+    {% schema %}
+    {
+      "presets": [
+          {
+              "name":"Banner Pike"
+          }
+      ],
+       "settings": [
+            {
+                "type":"image_picker",
+                "id":"banner_img",
+                "label":"Banner image"
+            }
+        ],
+       "blocks": [
+            {
+                "type":"text",
+                "name":"title",
+               "settings": [
+                   {
+                      "type": "text",
+                       "id":"title",
+                       "label":"title"
+                   },
+                   {
+                      "type": "select",
+                      "id":"banner_position",
+                      "label":"Banner Position",
+                      "options": [
+                        {
+                            "label":"center",
+                            "value":"center-pike"
+                        },
+                        {
+                            "label":"bottom left",
+                            "value":"bottom-left-pike"
+                        },
+                        {
+                            "label":"bottom right",
+                            "value":"bottom-right-pike"
+                        }
+                        
+                      ],
+                      "default":"bottom-left-pike"
+                      
+                   }
+               ]
+            }
+       ]
+    }
+    {% endschema %}
+
+</div>

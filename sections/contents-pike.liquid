@@ -1,0 +1,104 @@
+<style>
+    .contents-pike{
+        width: 80%;
+        margin: auto;
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .content{
+        width: 50%;
+        background-color: #ddd;
+        border-radius: 10px;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-bottom: 10px;
+        /* margin-right: 50px; */
+    }
+    .content{
+        text-align: center;
+    }
+    .more-items{
+        text-align: center;
+        width: 100%;
+    }
+    .content>p,
+    .para-short,
+    .para-full{
+        width: 100%;
+        margin: 0;
+    }
+    .content .more-text{
+        display: none;
+    }
+    .disable{
+        display: none;
+    }
+    .active{
+        display: block;
+    }
+</style>
+<div class="contents-pike">
+    
+    {% for block in section.blocks %}
+        
+    <div class="content disable">
+    
+        {%- if block.settings.content.size > 500 -%}
+        <p class="para-short">{{ block.settings.content | truncate: 200, "..." }}
+            <a class="readmore" href="#">Show More</a>
+        </p>
+        <p class="para-full" style="display: none;">
+            {{ block.settings.content }}
+            <br><a class="readless" href="#">Show Less</a>
+        </p>
+        {% else %}
+        <p>{{ block.settings.content }}</p>
+        {%- endif -%}
+
+        {%- if block.settings.author == blank -%}
+        <p> </p>
+
+        {%- else -%}
+        <p class="author">{{ block.settings.author }}</p>
+        
+        {%- endif -%}
+    </div>  
+
+    {% endfor %}
+    {%- if section.blocks.size > 6 -%}
+        <div class="more-items">view more</div>
+    {% endif %}
+</div>
+
+
+{% schema %}
+{
+   "presets": [
+       {
+           "name":"Content Pike"
+       }
+   ],
+  "settings": [
+      
+  ],
+  "blocks":[
+    {
+        "type": "text",
+        "name":"content",
+       "settings": [
+           {
+            "type": "text",
+            "id":"content",
+            "label":"content"
+           },
+           {
+              "type": "text",
+              "id":"author",
+              "label": "author"
+           }
+       ]
+    }
+  ]
+}
+{% endschema %}

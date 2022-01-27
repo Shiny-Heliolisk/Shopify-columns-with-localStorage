@@ -1,0 +1,196 @@
+{%- style -%}
+    .pike-banner{
+        position:relative;
+        overflow: hidden;
+    }
+
+    .pike-banner>img{
+        position:relative;
+        left:50%;
+        transform: translate(-50%);
+        filter: brightness({{ section.settings.image_overlay_opacity | divided_by: 100.0 }}) ;
+    }
+
+    .pike-banner-content{
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        background-color:rgba(50,50,50,0.6);
+        padding:50px;
+
+    }
+
+    .pike-banner-content > h1{
+        {%- for block in section.blocks -%}
+        font-size: {{ block.settings.title_font_size }}px;
+        
+        color: {{ block.settings.color_title }};
+        {%- endfor -%}
+        margin:0;
+    }
+
+    .pike-banner-content > p{
+        {%- for block in section.blocks -%}
+        font-size: {{ block.settings.paragraph_font_size }}px;
+        
+        color: {{ block.settings.color_para }};
+        {%- endfor -%}
+        margin:20px;
+    }
+
+    .pike-banner-content>a{
+        padding: 15px 20px;
+        background-color: #ddd;
+        color:white;
+        text-decoration:none;
+    }
+
+    .blank-div{
+        width:100%;
+        height: fit-content;
+        min-height: 500px;
+        background-color: #ddd;
+    }
+{%- endstyle -%}
+<div class="pike-banner">
+    
+    {%- if section.settings.pike_banner_image == blank -%}
+        <div class="blank-div">
+            <!-- this appear when the back ground not be set yet -->
+        </div>
+    {%- else -%}
+    
+    <img src="{{ section.settings.pike_banner_image | img_url: 'master' }}"
+          alt="{{ section.settings.pike_banner_image.alt | escape }}"
+          loading="lazy"
+          width="{{ section.settings.pike_banner_image.width }}"
+          height="{{ section.settings.pike_banner_image.height }}">
+    {%- endif -%}
+    
+    <div class="pike-banner-content">
+        {%- for block in section.blocks -%}
+        <h1>{{ block.settings.title }}</h1>
+        <p>{{ block.settings.paragraph }}</p>
+        <a href="#">{{ block.settings.button_text }}</a>
+        {%- endfor -%}
+    </div>
+</div>
+
+{% schema %}
+
+{
+    "presets": [
+        {
+            "name": "Pike Banner"
+        }
+    ],
+    "settings": [
+        {
+            "type": "image_picker",
+            "id": "pike_banner_image",
+            "label": "Banner image"
+        },
+        {
+            "type": "range",
+            "id": "image_overlay_opacity",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "%",
+            "label": "Brightness",
+            "default": 0
+          }
+    ],
+    "blocks": [
+        {
+            "type":"text",
+            "name":"Banner Content",
+            "settings": [
+                {
+                    "type":"text",
+                    "id": "title",
+                    "label":"Title"
+                },
+                {
+                    "type": "range",
+                    "id": "title_font_size",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "unit": "px",
+                    "label": "Title font size",
+                    "default": 70
+                },
+                {
+                    "type": "select",
+                    "id": "color_title",
+                    "options": [
+                      {
+                        "value": "red",
+                        "label": "red"
+                      },
+                      {
+                        "value": "green",
+                        "label": "green"
+                      },
+                      {
+                        "value": "white",
+                        "label": "white"
+                      }
+                    ],
+                    "default": "white",
+                    "label": "Title Color"
+                },
+                {
+                    "type":"text",
+                    "id":"paragraph",
+                    "label":"Text"
+                },
+                {
+                    "type": "range",
+                    "id": "paragraph_font_size",
+                    "min": 0,
+                    "max": 100,
+                    "step": 5,
+                    "unit": "px",
+                    "label": "Paragraph font size",
+                    "default": 20
+                },
+                {
+                    "type": "select",
+                    "id": "color_para",
+                    "options": [
+                      {
+                        "value": "black",
+                        "label": "red"
+                      },
+                      {
+                        "value": "green",
+                        "label": "green"
+                      },
+                      {
+                        "value": "white",
+                        "label": "white"
+                      }
+                    ],
+                    "default": "white",
+                    "label": "Paragraph Color"
+                },
+                {
+                    "type":"text",
+                    "id":"button_text",
+                    "label":"Button text"
+                },
+                {
+                    "type":"url",
+                    "id":"banner_link",
+                    "label":"Add Link"
+                }
+            ]
+        }
+    ]
+}
+
+{% endschema %}

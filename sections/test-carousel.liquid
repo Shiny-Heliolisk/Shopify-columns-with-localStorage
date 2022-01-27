@@ -1,0 +1,29 @@
+<ul class="owl-carousel">
+    {% for block in section.blocks %}
+        <li>{{ block.settings.item }}</li>
+    {% endfor %}
+    
+</ul>
+
+{% schema %}
+{
+ "presets": [
+     {
+         "name":"Test slick"
+     }
+ ],
+    "blocks":[
+     {
+        "type": "block",
+        "name":"item",
+       "settings": [
+           {
+              "type": "text",
+              "id":"item",
+              "label":"item"
+           }
+       ]
+     }
+    ]
+}
+{% endschema %}
