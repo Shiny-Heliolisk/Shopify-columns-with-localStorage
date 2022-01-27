@@ -2,6 +2,9 @@
     font-family: 'Gotham-bold';
     src: url(GothamBold.ttf);
 }
+.card__media a{
+    z-index: 3;
+}
 .card__label{
     background-color: #fff;
     border: solid 1px #ddd;
