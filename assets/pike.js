@@ -86,31 +86,33 @@ $(document).ready(function () {
     });
 
     // neverland
-
+    $('.two-columns').addClass("two-columns-inactive");
+    $('.four-columns').addClass("four-columns-active");
+    
     // check values in storage, if they exist then use
     var checkLayout  = Boolean(localStorage.getItem("classLayout"));
     var check_2Columns_button = Boolean(localStorage.getItem("two-col_is-active"));
     var check_4Columns_button = Boolean(localStorage.getItem("four-col_is-active"));
-    if (checkLayout) {
-        var oldLayout = localStorage.getItem("classLayout");     
+    console.log(check_2Columns_button) ;
+    console.log(check_4Columns_button) ;
+    console.log(checkLayout) ;
+    if (checkLayout || checkLayout=="") {
+        var oldLayout = localStorage.getItem("classLayout");   
+        $('#product-grid').removeClass("grid--4-col-desktop");  
+        $('#product-grid').addClass(oldLayout);
     }
     if (check_2Columns_button) {
-        var old_2Columns_button = localStorage.getItem("two-col_is-active");     
+        var old_2Columns_button = localStorage.getItem("two-col_is-active");    
+        $('.two-columns').removeClass('two-columns-active');
+        $('.two-columns').removeClass('two-columns-inactive'); 
+        $('.two-columns').addClass(old_2Columns_button);
     }
     if (check_4Columns_button) {
-        var old_4Columns_button = localStorage.getItem("four-col_is-active");     
+        var old_4Columns_button = localStorage.getItem("four-col_is-active");    
+        $('.four-columns').removeClass('four-columns-active');
+        $('.four-columns').removeClass('four-columns-inactive'); 
+        $('.four-columns').addClass(old_4Columns_button);
     }
-    // when refresh
-    $('.two-columns').removeClass('two-columns-active');
-    $('.two-columns').removeClass('two-columns-inactive');
-    $('.four-columns').removeClass('four-columns-active');
-    $('.four-columns').removeClass('four-columns-active');
-
-    $('#product-grid').removeClass('grid--4-col-desktop');
-
-    $('.two-columns').addClass(old_2Columns_button);
-    $('.four-columns').addClass(old_4Columns_button);
-    $('#product-grid').addClass(oldLayout);
     
     $('.four-columns').click(function(){
         
