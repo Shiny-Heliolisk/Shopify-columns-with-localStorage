@@ -101,6 +101,9 @@ $(document).ready(function () {
         $('#product-grid').removeClass("grid--4-col-desktop");  
         $('#product-grid').addClass(oldLayout);
     }
+    if (oldLayout== null) {
+        $('#product-grid').addClass("grid--4-col-desktop"); 
+    }
     if (check_2Columns_button) {
         var old_2Columns_button = localStorage.getItem("two-col_is-active");    
         $('.two-columns').removeClass('two-columns-active');
